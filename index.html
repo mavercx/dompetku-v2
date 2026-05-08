@@ -77,6 +77,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
 /* INSTALL MODAL */
 #install-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:3500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+#install-overlay.show{opacity:1;pointer-events:auto;}
 .install-box{background:var(--surface);border-radius:var(--radius);padding:24px;max-width:340px;width:90%;box-shadow:0 16px 40px rgba(0,0,0,0.2);}
 
 /* ══════════════════════════
@@ -153,7 +154,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .btn-add:active{transform:scale(.96);}
 
 /* LAYOUT */
-.container{max-width:900px;margin:0 auto;padding:24px 20px 80px;}
+.container{max-width:900px;margin:0 auto;padding:24px 20px 120px;}
 .page{display:none;animation:fadeIn .35s ease;}
 .page.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
@@ -224,7 +225,7 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
 
 @media(max-width:640px){
   .stat-grid{grid-template-columns:1fr 1fr;}
-  .container{padding:16px 14px 80px;}
+  .container{padding:16px 14px 120px;}
 }
 </style>
 </head>
@@ -595,8 +596,8 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
   window.confirmLogout = () => showModal('Logout?', 'Data tetap aman di Firebase.', () => signOut(auth), 'Logout');
 
   // MODAL & UI HELPERS
-  window.openInstall = () => { document.getElementById('install-overlay').style.opacity = '1'; document.getElementById('install-overlay').style.pointerEvents = 'auto'; };
-  window.closeInstall = () => { document.getElementById('install-overlay').style.opacity = '0'; document.getElementById('install-overlay').style.pointerEvents = 'none'; localStorage.setItem('dompetku_install_shown','1'); };
+  window.openInstall = () => { document.getElementById('install-overlay').classList.add('show'); };
+  window.closeInstall = () => { document.getElementById('install-overlay').classList.remove('show'); localStorage.setItem('dompetku_install_shown','1'); };
   window.installTab = (tab) => {
     document.getElementById('install-android').style.display = tab==='android' ? 'flex' : 'none';
     document.getElementById('install-ios').style.display = tab==='ios' ? 'flex' : 'none';
@@ -703,7 +704,7 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
     document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
     if(page==='analitik') setTimeout(()=>window.renderChart && window.renderChart(), 100);
     window.scrollTo(0,0);
-    toggleMenu();
+    document.getElementById('nav-dropdown').classList.remove('show'); // selalu tutup, bukan toggle
   };
   window.toggleMenu = () => document.getElementById('nav-dropdown').classList.toggle('show');
   window.toggleExport = () => document.getElementById('export-dropdown').classList.toggle('show');
@@ -770,6 +771,8 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
     if(!e.target.closest('.export-wrap')) document.getElementById('export-dropdown').classList.remove('show');
     if(e.target === document.getElementById('support-overlay')) closeSupportModal();
     if(e.target === document.getElementById('modal-overlay')) closeModal();
+    if(e.target === document.getElementById('install-overlay')) closeInstall();
+    if(e.target === document.getElementById('privacy-overlay')) closePrivacy();
   });
 </script>
 </body>
