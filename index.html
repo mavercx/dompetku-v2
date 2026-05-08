@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/10433/10433048.png">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
@@ -54,7 +54,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .spinner{width:40px;height:40px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* MODAL */
+/* MODAL KONFIRMASI */
 #modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:3000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
 #modal-overlay.show{opacity:1;pointer-events:auto;}
 .modal-box{background:var(--surface);border-radius:var(--radius);padding:28px 24px;max-width:340px;width:90%;box-shadow:0 16px 40px rgba(0,0,0,0.18);transform:scale(.96);transition:transform .2s;}
@@ -78,6 +78,52 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 /* INSTALL MODAL */
 #install-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:3500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
 .install-box{background:var(--surface);border-radius:var(--radius);padding:24px;max-width:340px;width:90%;box-shadow:0 16px 40px rgba(0,0,0,0.2);}
+
+/* ══════════════════════════
+   SUPPORT MODAL (Popup Card)
+══════════════════════════ */
+#support-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:3200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+#support-overlay.show{opacity:1;pointer-events:auto;}
+.support-box{background:var(--surface);border-radius:var(--radius);padding:28px 24px;max-width:340px;width:90%;box-shadow:0 16px 40px rgba(0,0,0,0.18);transform:scale(.96);transition:transform .2s;text-align:center;}
+#support-overlay.show .support-box{transform:scale(1);}
+.support-badge{display:inline-block;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;margin-bottom:14px;letter-spacing:.04em;text-transform:uppercase;}
+.support-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px;line-height:1.25;}
+.support-title span{color:var(--accent);}
+.support-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:20px;}
+.support-amounts{display:flex;justify-content:center;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+.amount-chip{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s;font-family:var(--mono);}
+.amount-chip:hover{border-color:var(--accent);color:var(--accent);}
+.amount-chip.active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent);}
+.support-btn{display:block;width:100%;background:var(--accent);color:#fff;font-size:14px;font-weight:700;padding:13px;border-radius:var(--radius-sm);text-decoration:none;margin-bottom:10px;font-family:var(--font);transition:background .15s;border:none;cursor:pointer;}
+.support-btn:hover{background:#1D4ED8;}
+.support-skip{font-size:12px;color:var(--text3);cursor:pointer;text-decoration:underline;text-underline-offset:3px;background:none;border:none;font-family:var(--font);}
+
+/* ══════════════════════════
+   FOOTER STRIP BANNER
+══════════════════════════ */
+#support-strip{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  background:var(--accent);
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  z-index:500;
+  box-shadow:0 -4px 16px rgba(37,99,235,0.2);
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+#support-strip.visible{transform:translateY(0);}
+#support-strip.hidden-strip{display:none;}
+.strip-left{display:flex;align-items:center;gap:10px;}
+.strip-icon{font-size:20px;flex-shrink:0;}
+.strip-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;}
+.strip-sub{font-size:11px;color:rgba(255,255,255,0.65);}
+.strip-btn{background:#fff;color:var(--accent);font-size:12px;font-weight:700;padding:8px 16px;border-radius:99px;text-decoration:none;white-space:nowrap;flex-shrink:0;font-family:var(--font);transition:background .15s;}
+.strip-btn:hover{background:#DBEAFE;}
+.strip-close{background:none;border:none;color:rgba(255,255,255,0.7);font-size:18px;cursor:pointer;padding:4px;flex-shrink:0;line-height:1;}
 
 /* NAV */
 .nav{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
@@ -238,6 +284,40 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
   </div>
 </div>
 
+<!-- ══════════════════════════
+     SUPPORT MODAL (Popup Card)
+══════════════════════════ -->
+<div id="support-overlay">
+  <div class="support-box">
+    <div class="support-badge">Gratis selamanya</div>
+    <div class="support-title">Kalau <span>Dompetku</span> membantu,<br>support yuk! ☕</div>
+    <p class="support-desc">App ini saya bangun sendiri dan gratis dipakai siapa saja. Tidak ada kewajiban — support seikhlasnya untuk pengembangan fitur berikutnya.</p>
+    <div class="support-amounts">
+      <div class="amount-chip" onclick="selectChip(this)">5rb</div>
+      <div class="amount-chip active" onclick="selectChip(this)">10rb</div>
+      <div class="amount-chip" onclick="selectChip(this)">25rb</div>
+      <div class="amount-chip" onclick="selectChip(this)">Bebas</div>
+    </div>
+    <a href="https://teer.id/Ridhocatur" target="_blank" class="support-btn">☕ Support via Trakteer</a>
+    <button class="support-skip" onclick="closeSupportModal()">Tidak sekarang</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     FOOTER STRIP BANNER
+══════════════════════════ -->
+<div id="support-strip" class="hidden-strip">
+  <div class="strip-left">
+    <div class="strip-icon">☕</div>
+    <div>
+      <div class="strip-title">App ini gratis — support pengembangan</div>
+      <div class="strip-sub">Bayar seikhlasnya mulai Rp 5.000</div>
+    </div>
+  </div>
+  <a href="https://teer.id/Ridhocatur" target="_blank" class="strip-btn">Support →</a>
+  <button class="strip-close" onclick="dismissStrip()" title="Tutup">×</button>
+</div>
+
 <!-- LOGIN -->
 <div id="login-page">
   <div class="login-card">
@@ -393,22 +473,25 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
       <button class="btn-cancel" onclick="openPrivacy()" style="width:auto;padding:10px 20px;">🔐 Baca Kebijakan Privasi</button>
       <button class="btn-cancel" onclick="openInstall()" style="width:auto;padding:10px 20px;margin-top:10px;">📲 Panduan Pasang di HP</button>
 
-      <!-- Support Trakteer (Banner 3 Claude) -->
+      <!-- ══ Support Trakteer — Banner Row ══ -->
       <hr style="border:0;border-top:1px solid var(--border);margin:28px 0;">
-      <div style="font-weight:700;margin-bottom:12px;font-size:14px;color:var(--accent);">
-        ☕ Support Pengembang
-      </div>
-      <a href="https://trakteer.id/ridhocatur" target="_blank" 
-         style="display:flex;align-items:center;gap:12px; background:var(--surface2);border:1px solid var(--border); border-radius:var(--radius-sm);padding:14px 16px; text-decoration:none;transition:border-color .2s;"
-         onmouseover="this.style.borderColor='var(--accent)'"
-         onmouseout="this.style.borderColor='var(--border)'">
-        <div style="width:42px;height:42px;background:var(--accent-bg); border-radius:12px;display:flex;align-items:center; justify-content:center;font-size:20px;flex-shrink:0;">☕</div>
-        <div>
+      <div style="font-weight:700;margin-bottom:12px;font-size:14px;color:var(--accent);">☕ Support Pengembang</div>
+      <a href="https://teer.id/Ridhocatur" target="_blank"
+         style="display:flex;align-items:center;gap:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;text-decoration:none;transition:border-color .2s,box-shadow .2s;"
+         onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 3px var(--accent-bg)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <div style="width:42px;height:42px;background:var(--accent-bg);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">☕</div>
+        <div style="flex:1;">
           <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Support pengembang</div>
           <div style="font-size:12px;color:var(--text3);">App gratis — dukung seikhlasnya via Trakteer</div>
         </div>
-        <div style="margin-left:auto;color:var(--text3);font-size:18px;">›</div>
+        <div style="color:var(--text3);font-size:18px;font-weight:300;">›</div>
       </a>
+
+      <!-- Tombol buka support modal manual -->
+      <button onclick="openSupportModal()" style="width:100%;margin-top:12px;padding:11px;border-radius:var(--radius-sm);background:none;border:1px dashed var(--border);font-size:13px;font-weight:600;color:var(--text3);cursor:pointer;font-family:var(--font);">
+        ☕ Lihat opsi support lainnya
+      </button>
     </div>
   </div>
 </div>
@@ -445,12 +528,60 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
   const MONTHS = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
   const ICONS = { 'Makan':'🍽️','Transportasi':'🚗','Perawatan Picanto':'⚙️','Hobi Selam':'🤿','Belanja':'🛍️','Gaji':'💵','Sewa Gear Slowpulse':'🏄‍♂️','Lainnya':'📌' };
 
+  // ══════════════════════════
+  // SUPPORT BANNER LOGIC
+  // ══════════════════════════
+  const SUPPORT_URL = 'https://teer.id/Ridhocatur';
+  const STRIP_KEY   = 'dompetku_strip_dismissed';
+  const MODAL_KEY   = 'dompetku_support_modal_shown';
+  const SAVE_COUNT_KEY = 'dompetku_save_count';
+
+  // Tampilkan footer strip setelah 8 detik login, kalau belum pernah dismiss
+  function initSupportStrip() {
+    if (localStorage.getItem(STRIP_KEY)) return;
+    const strip = document.getElementById('support-strip');
+    strip.classList.remove('hidden-strip');
+    setTimeout(() => strip.classList.add('visible'), 8000);
+  }
+
+  window.dismissStrip = () => {
+    const strip = document.getElementById('support-strip');
+    strip.classList.remove('visible');
+    setTimeout(() => strip.classList.add('hidden-strip'), 400);
+    localStorage.setItem(STRIP_KEY, '1');
+  };
+
+  // Support modal muncul setelah user simpan transaksi ke-5, satu kali saja
+  function checkSupportModal() {
+    if (localStorage.getItem(MODAL_KEY)) return;
+    let count = parseInt(localStorage.getItem(SAVE_COUNT_KEY) || '0') + 1;
+    localStorage.setItem(SAVE_COUNT_KEY, count);
+    if (count >= 5) openSupportModal();
+  }
+
+  window.openSupportModal = () => {
+    document.getElementById('support-overlay').classList.add('show');
+  };
+
+  window.closeSupportModal = () => {
+    document.getElementById('support-overlay').classList.remove('show');
+    localStorage.setItem(MODAL_KEY, '1');
+  };
+
+  window.selectChip = (el) => {
+    document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  };
+
+  // ══════════════════════════
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
       document.getElementById('login-page').style.display = 'none';
       document.getElementById('app-content').style.display = 'block';
       await loadDataFromFirebase();
+      initSupportStrip();
       if(!localStorage.getItem('dompetku_install_shown')) setTimeout(() => openInstall(), 2000);
     } else {
       currentUser = null;
@@ -535,6 +666,7 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
       } else {
         const ref = await addDoc(collection(db,'users',currentUser.uid,'transactions'), record);
         record.id=ref.id; window.data.push(record);
+        checkSupportModal(); // cek apakah perlu tampilkan modal support
       }
       resetForm(); renderAll(); hideLoading(); showToast('Tersimpan!');
     } catch(e) { hideLoading(); }
@@ -549,7 +681,7 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
     });
   };
 
-  // UI RENDERING (Sederhana)
+  // UI RENDERING
   window.renderAll = () => { renderBeranda(); renderTransaksi(); renderAnalitik(); renderBudget(); renderCC(); };
 
   function renderBeranda() {
@@ -568,26 +700,77 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
   window.goTo = (page, title) => {
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById('page-'+page).classList.add('active');
-    if(page==='analitik') setTimeout(()=>window.renderChart(), 100);
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    if(page==='analitik') setTimeout(()=>window.renderChart && window.renderChart(), 100);
     window.scrollTo(0,0);
+    toggleMenu();
   };
   window.toggleMenu = () => document.getElementById('nav-dropdown').classList.toggle('show');
+  window.toggleExport = () => document.getElementById('export-dropdown').classList.toggle('show');
+  window.closeExport = () => document.getElementById('export-dropdown').classList.remove('show');
+  window.openPrivacy = () => document.getElementById('privacy-overlay').classList.add('show');
+  window.closePrivacy = () => document.getElementById('privacy-overlay').classList.remove('show');
+  window.showModal = (title, desc, cb, okLabel='Hapus') => {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-desc').textContent = desc;
+    document.getElementById('modal-ok-btn').textContent = okLabel;
+    document.getElementById('modal-ok-btn').onclick = () => { closeModal(); cb(); };
+    document.getElementById('modal-overlay').classList.add('show');
+  };
+  window.closeModal = () => document.getElementById('modal-overlay').classList.remove('show');
+  window.toggleTheme = () => {
+    document.body.classList.toggle('dark-theme');
+    document.getElementById('theme-toggle').textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+    localStorage.setItem('dompetku_theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+  };
+  if(localStorage.getItem('dompetku_theme')==='dark') { document.body.classList.add('dark-theme'); document.getElementById('theme-toggle').textContent='☀️'; }
+
   window.formatRibuan = (el) => {
     let v = el.value.replace(/\D/g,''); el.value = v ? parseInt(v).toLocaleString('id-ID') : '';
-    document.getElementById(el.id.replace('-display','')).value = v;
+    const hiddenId = el.id.replace('-display','');
+    const hidden = document.getElementById(hiddenId);
+    if(hidden) hidden.value = v;
   };
 
-  // Sisa fungsi (Placeholder untuk menjaga struktur)
-  window.renderTransaksi = () => {}; window.renderAnalitik = () => {}; window.renderBudget = () => {}; window.renderCC = () => {};
+  // Placeholder functions (structure preservation)
+  window.renderTransaksi = () => {};
+  window.renderAnalitik = () => {};
+  window.renderBudget = () => {};
+  window.renderCC = () => {};
+  window.updateAutocomplete = () => {};
+  window.renderCategoryList = () => {};
+  window.resetForm = () => { goTo('beranda','Beranda'); };
+  window.syncPeriod = () => { renderAll(); };
+  window.simpanBudget = () => {};
+  window.simpanPengaturanCC = () => {};
+  window.tambahKategori = () => {};
+  window.checkAutoCC = () => {};
+  window.syncFieldsFromHistory = () => {};
+  window.exportCSV = () => {};
+  window.exportPDF = () => {};
+
   window.updateKategoriDropdown = () => {
     const j = document.getElementById('f-jenis').value;
     document.getElementById('f-kategori').innerHTML = window.userCategories[j].map(k=>`<option>${k}</option>`).join('');
   };
+
   function populateSelects() {
-    const now=new Date();
-    ['b-month','t-month','a-month','c-month'].forEach(id=>MONTHS.forEach(m=>document.getElementById(id).add(new Option(m,m,false,m===MONTHS[now.getMonth()]))));
-    ['b-year','t-year','a-year','c-year'].forEach(id=>[2025,2026].forEach(y=>document.getElementById(id).add(new Option(y,y,false,y===now.getFullYear()))));
+    const now = new Date();
+    ['b-month','t-month','a-month','c-month'].forEach(id => {
+      MONTHS.forEach(m => document.getElementById(id).add(new Option(m,m,false,m===MONTHS[now.getMonth()])));
+    });
+    ['b-year','t-year','a-year','c-year'].forEach(id => {
+      [2025,2026].forEach(y => document.getElementById(id).add(new Option(y,y,false,y===now.getFullYear())));
+    });
   }
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', (e) => {
+    if(!e.target.closest('.nav-menu-wrap')) document.getElementById('nav-dropdown').classList.remove('show');
+    if(!e.target.closest('.export-wrap')) document.getElementById('export-dropdown').classList.remove('show');
+    if(e.target === document.getElementById('support-overlay')) closeSupportModal();
+    if(e.target === document.getElementById('modal-overlay')) closeModal();
+  });
 </script>
 </body>
 </html>
