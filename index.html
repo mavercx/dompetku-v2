@@ -296,19 +296,14 @@ select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--a
 </div>
 
 <!-- SUPPORT MODAL (popup) -->
-<div id="support-overlay">
-  <div class="support-box">
-    <div class="support-badge">Gratis selamanya</div>
-    <div class="support-title">Kalau <span>Dompetku</span> membantu,<br>support yuk! ☕</div>
-    <p class="support-desc">App ini saya bangun sendiri dan gratis dipakai siapa saja. Tidak ada kewajiban — support seikhlasnya untuk pengembangan fitur berikutnya.</p>
-    <div class="support-amounts">
-      <div class="support-chip">5rb</div>
-      <div class="support-chip active">10rb</div>
-      <div class="support-chip">25rb</div>
-      <div class="support-chip">Bebas</div>
-    </div>
-    <a href="https://trakteer.id/ridhocatur" target="_blank" class="btn-support-ok">☕ Support via Trakteer</a>
-    <button class="btn-support-skip" onclick="closeSupportModal()">Tidak sekarang</button>
+<div id="support-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:4000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;">
+  <div class="support-box" style="background:var(--surface);border-radius:var(--radius);padding:32px 24px;max-width:340px;width:90%;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,0.2);">
+    <div class="support-title" style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px;line-height:1.3;">Kalau <span>Dompetku</span> membantu,<br>support yuk! ☕</div>
+    <p class="support-desc" style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:24px;">App ini saya bangun sendiri untuk kita gunakan gratis. Jika bermanfaat, dukung saya beli segelas <b>Americano</b> untuk semangat kembangkan fitur berikutnya.</p>
+    
+    <a href="https://trakteer.id/ridhocatur" target="_blank" class="btn-support-ok" style="display:block;width:100%;background:var(--accent);color:#fff;text-decoration:none;padding:14px;border-radius:var(--radius-sm);font-size:14px;font-weight:700;font-family:var(--font);margin-bottom:12px;">☕ Traktir Americano via Trakteer</a>
+    
+    <button class="btn-support-skip" onclick="closeSupportModal()" style="background:none;border:none;color:var(--text3);font-size:12px;cursor:pointer;text-decoration:underline;font-family:var(--font);">Mungkin nanti</button>
   </div>
 </div>
 
